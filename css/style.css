@@ -53,7 +53,6 @@ table {
 
 html {
 	height: 100%;
-	overflow: hidden;
 }
 
 body {
@@ -62,8 +61,25 @@ body {
 	background: #c4deff url(../images/bg.png) repeat-x;
 	color: black;
 	font-family: "Helvetica", "Arial", sans-serif;
-	font-size: 14pt;
+	font-size: 12pt;
 	text-shadow: 1px 1px #fff;
+	line-height: 1.4;
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+h1 {
+	text-align: right;
+	font-size: 300%;
+	color: #f1652e;
+	margin-bottom: 20px;
+	margin-top: -100px;
+}
+
+strong {
+	font-weight: bold;
 }
 
 a {
@@ -90,6 +106,8 @@ a:visited {
 #header {
 	height: 250px;
 	position: relative;
+	z-index: 1000;
+	width: 100%;
 }
 
 #title {
@@ -121,13 +139,28 @@ a:visited {
 	overflow: hidden;
 }
 
-#content-silo {
+#main {
+	font-size: 16pt;
+}
+
+#presented-by {
+	font-size: 12pt;
+}
+
+#presented-by p {
+	margin-bottom: 5px;
+	font-style: italic;
 }
 
 .content-page {
 	width: 986px;
 	top: 300px;
 	position: absolute;
+	background: url(../images/contentbg.png) no-repeat center center;
+}
+
+#main.content-page {
+	background: none;
 }
 
 .content-hidden {
@@ -146,10 +179,29 @@ a:visited {
 	width: 442px;
 	height: 964px;
 	margin-top: -200px;
-	background: url(../images/iphone.png) no-repeat;
+	z-index: 1001;
+/*	background: url(../images/iphone.png) no-repeat;*/
 	border: 0;
 	float: right;
 	position: relative;
+}
+
+.persona {
+	clear: both;
+	margin-bottom: 50px;
+}
+
+.persona img {
+	float: left;
+	margin-right: 50px;
+}
+
+.persona ul {
+	padding-top: 20px;
+}
+
+.persona ul li {
+	margin-bottom: 5px;
 }
 
 div.click_indicator {
