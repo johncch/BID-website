@@ -24,7 +24,42 @@ $(function() {
 												id: 'login_type',
 												clickableDivs: [
 													createClickableDiv(279, 324, 66, 24, 'taskmenu'),
-												]
+												],
+												onEnter: function() {
+													$("<div class='usernametext' />").text("max_null")
+																					.appendTo($("div#iPhone"))
+																					.css("position", "absolute")
+																					.css("top", "230px")
+																					.css("left", "60px")
+																					;
+													$("<div class='usernametext' />").text("********")
+																					.appendTo($("div#iPhone"))
+																					.css("position", "absolute")
+																					.css("top", "280px")
+																					.css("left", "60px")
+																					;
+													$("<div class='whitecover' />").css("background-color", "white")
+																					.appendTo($("div#iPhone"))
+																					.css("position", "absolute")
+																					.css("top", "230px")
+																					.css("left", "55px")
+																					.css("height", "25px")
+																					.css("width", "100px")
+																					.animate({left: "155px"}, 3000);
+													$("<div class='whitecover' />").css("background-color", "white")
+																					.appendTo($("div#iPhone"))
+																					.css("position", "absolute")
+																					.css("top", "280px")
+																					.css("left", "55px")
+																					.css("height", "25px")
+																					.css("width", "100px")
+													window.setTimeout(function(){$("div.whitecover")
+																					.animate({left: "155px"}, 3000); }, 4000);
+
+												},
+												onExit: function() {
+													$("div.whitecover, div.usernametext").remove();
+												}
 											}),
 										new State({
 												img_src: 'images/assigner/b_taskmenu.png',
@@ -139,11 +174,10 @@ $(function() {
 												]
 											}),
 										new State({
-												img_src: 'images/assigner/f_profileRoger Copy 1.png',
+												img_src: 'images/assigner/request_sent.png',
 												id: 'request_sent',
 												clickableDivs: [
-													createClickableDiv(202,395,123,33, 'results'),
-													createClickableDiv(71,397,117,31, 'taskmenu'),
+													createClickableDiv(71,397,247,31, 'results'),
 												],
 											}),
 										new State({
@@ -159,16 +193,22 @@ $(function() {
 												id: 'roger',
 												clickableDivs: [
 													createClickableDiv(52,568,136,25, 'select_roger'),
-													createClickableDiv(211,569,128,27, 'contact_roger'),
+											//		createClickableDiv(211,569,128,27, 'contact_roger'),
 												],
 											}),
 										new State({
 												img_src: 'images/assigner/last_screen.png',
 												id: 'select_roger',
 												clickableDivs: [
-													createClickableDiv(64,390,127,41, 'taskmenu'),
-													createClickableDiv(199,392,124,39, 'contact_roger'),
+											//		createClickableDiv(64,390,127,41, 'taskmenu'),
+											//		createClickableDiv(199,392,124,39, 'contact_roger'),
 												],
+												onEnter: function() {
+													$("div.roger").addClass("notified");
+												},
+												onExit: function() {
+													$("div.roger").removeClass("notified");
+												},
 											}),
 										new State({
 												img_src: 'images/assigner/f_profileRoger Copy.png',
@@ -192,9 +232,70 @@ $(function() {
 													createClickableDiv(49,158,35,32, 'contact_roger'),
 												],
 											}),
+										new State({
+												img_src: 'images/helper/Helper_Start_page.gif',
+												id: 'helper_start',
+												clickableDivs: [
+													createClickableDiv(194,261,77,68, 'helper_notification'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_task_notification.png',
+												id: 'helper_notification',
+												clickableDivs: [
+													createClickableDiv(199,397,123,39, 'helper_taskinfo'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_Task_info.gif',
+												id: 'helper_taskinfo',
+												clickableDivs: [
+													createClickableDiv(50,567,136,28, 'helper_notificationsent'),
+//													createClickableDiv(211,569,128,24, 'helper_home'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_Notification_sent.gif',
+												id: 'helper_notificationsent',
+												clickableDivs: [
+													createClickableDiv(136,440,131,46, 'helper_home'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_home_page.gif',
+												id: 'helper_home',
+												clickableDivs: [
+													createClickableDiv(138,630,113,73, 'helper_confirm'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_Confirm.png',
+												id: 'helper_confirm',
+												clickableDivs: [
+													createClickableDiv(201,345,127,40, 'helper_map'),
+												],
+											}),
+										new State({
+												img_src: 'images/helper/Helper_Map.gif',
+												id: 'helper_map',
+												clickableDivs: [
+												//	createClickableDiv(37,158,55,30, 'helper_taskinfo'),
+												//<D-r>	createClickableDiv(279,157,78,31, 'helper_home'),
+												],
+											}),
 									],
 								firstState: 'app_start'
 							});
+		$("div.max").click(function() {
+			fsm.setState("app_start");
+			$("div.max").addClass("selected");
+			$("div.roger").removeClass("selected");
+		});
+		$("div.roger").click(function() {
+			fsm.setState("helper_start");
+			$("div.roger").addClass("selected");
+			$("div.max").removeClass("selected");
+		});
 		/*
 												onExit: function() {
 													$("div#iPhone").css("-webkit-transform", "rotate(720deg)");
@@ -211,7 +312,7 @@ $(function() {
 
 var paging = {
 
-	order: ["main", "design", "people", "process"],
+	order: ["main", "intro", "people", "process"],
 
 	main: null,
 	design: null,
@@ -221,15 +322,22 @@ var paging = {
 	currentPage: "main",
 
 	init: function() {
-		this.main = $("#main");
-		this.design = $("#design");
+/*		this.main = $("#main");
+		this.design = $("#intro");
 		this.people = $("#people");
-		this.process = $("#process");
+		this.process = $("#process");*/
 
-		$("#a-main").click(this.pageTurn("main"));
+		/*$("#a-main").click(this.pageTurn("main"));
 		$("#a-design").click(this.pageTurn("design"));
 		$("#a-people").click(this.pageTurn("people"));
-		$("#a-process").click(this.pageTurn("process"));
+		$("#a-process").click(this.pageTurn("process"));*/
+		$(".a-links").each(function(item, el) {
+			var self = $(el);
+			var id = self.attr("id").substr(2);
+			paging[id] = $("#" + id);
+			console.log(id);
+			self.click(paging.pageTurn(id));
+		});
 
 		this.contentLeft = this.main.offset().left;
 		this.contentTop = this.main.offset().top;
@@ -258,14 +366,13 @@ var paging = {
 
 			var multp = (paging.order.indexOf(newPage) < paging.order.indexOf(currentPage)) ? -1 : 1;
 
-			// console.log(paging[newPage]);
-
 			paging[newPage].removeClass("content-hidden");
 			paging[newPage].css({
 				"top": paging.contentTop,	
 				"left": multp * paging.offset
 			});
 
+			// console.log(paging.contentLeft);
 			paging[newPage].animate({
 				left: paging.contentLeft
 			}, 500);
@@ -334,7 +441,7 @@ var FSM = function(options) {
 							startclick = [evt.clientX, evt.clientY];
 							rectDiv = $("<div />").css("opacity", 0.8)
 												.css("position", "absolute")
-												.css("z-index", 1000)
+												.css("z-index", 9999000)
 												.css("left", evt.clientX)
 												.css("top", evt.clientY)
 												.css("background-color", "orange")
@@ -389,7 +496,7 @@ FSM.prototype.setState = function(stateId) {
 		if(toState.onEnter!=null) {
 			toState.onEnter(fromState);
 		}
-		$("div", self.display).remove();
+		$("div.click_indicator", self.display).remove();
 		for(var i = 0; i<toState.clickableDivs.length; i++) {
 			var clickableDiv = toState.clickableDivs[i];
 			var div = clickableDiv.div;

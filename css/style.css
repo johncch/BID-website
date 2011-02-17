@@ -64,6 +64,7 @@ body {
 	font-size: 12pt;
 	text-shadow: 1px 1px #fff;
 	line-height: 1.4;
+	overflow-x: hidden;
 }
 
 p {
@@ -176,11 +177,12 @@ a:visited {
 }
 
 #iPhone {
-	width: 442px;
-	height: 964px;
+	width: 520px;
+	height: 850px;
 	margin-top: -200px;
+	margin-right: -70px;
 	z-index: 1001;
-/*	background: url(../images/iphone.png) no-repeat;*/
+	background: url(../images/iphone.png) no-repeat;
 	border: 0;
 	float: right;
 	position: relative;
@@ -205,22 +207,78 @@ a:visited {
 }
 
 div.click_indicator {
-	 border: 5px dashed #CC3380;
+	 border: 4px dashed #FF0000;
 	 cursor: pointer;
-	 opacity: 0.8;
+	 opacity: 1.0;
 	 border-radius: 10px;
 	 -moz-border-radius: 10px;
-	-moz-transition-property: opacity, background-color, border-color;
+	-moz-transition-property: opacity, left, top, background-color, border-color;
 	-moz-transition-duration: 1s 1s;
 	-webkit-transition: all 1s ease-in-out;
+	-moz-box-shadow: 0px 0px 10px #f00; 
+	-webkit-box-shadow: 0px 0px 10px #f00;
  }
  div.click_indicator.highPulse {
-	 border-color: #FF0000;
-	 background-color: #977;
-	 opacity: 0.3;
+	border-color: #FF0000;
+/*	 background-color: #977;*/
+	opacity: 0.5;
  }
  div.click_indicator.hover {
-	 border-color: #CC8033;
-	 opacity: 0.9;
-	 background: none;
+	border: solid #ff0000 5px;
+	background: rgba(255, 0, 0, 0.5);
+/*	border-color: #f1652e;*/
+	opacity: 0.9;
  }
+
+div.person {
+	-moz-transition-property: opacity, left, top, width, height, background-color, border-color;
+	-moz-transition-duration: 1s 1s;
+	-webkit-transition: all 1s ease-in-out;
+	color: black;
+	text-shadow: none;
+	font-size: 12px;
+	position: absolute;
+	cursor: pointer;
+	width: 100px;
+	right: 0;
+	text-align: center;
+	float:right;
+	padding: 10px 20px;
+	z-index: -10;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	opacity: 0.5;
+}
+
+.max {
+	top: 300px;
+}
+
+.roger {
+	top: 450px;
+}
+
+div.person.selected {
+	font-size: 20px;
+	opacity: 1.0;
+}
+
+div.person.notified {
+	background-color: #ff0000;
+	opacity: 0.8;
+	border: 5px dashed #ff0000;
+	background: rgba(255, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 10px #f00; 
+	-webkit-box-shadow: 0px 0px 10px #f00;
+}
+
+div.person img {
+	 width: 80px;
+	-moz-transition-property: opacity, width, height, background-color, border-color;
+	-moz-transition-duration: 1s 1s;
+	-webkit-transition: all 1s ease-in-out;
+}
+
+div.person.selected img {
+	border: 1px solid black;
+}
