@@ -105,7 +105,7 @@ a:visited {
 }
 
 #header {
-	height: 250px;
+	height: 230px;
 	position: relative;
 	z-index: 1000;
 	width: 100%;
@@ -124,7 +124,7 @@ a:visited {
 
 #navigation {
 	position: absolute;
-	bottom: 50px;
+	bottom: 30px;
 	left: 200px;
 }
 
@@ -206,6 +206,34 @@ a:visited {
 	margin-bottom: 5px;
 }
 
+.content-process {
+	padding-top: 10px;
+}
+
+.content-process ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.content-process ul li {
+	float: left;
+	z-index: 10005;
+}
+
+.content-process ul li:last-child:after {
+	content: "";
+}
+
+.content-process ul li:after {
+	content: "\00a0\00a0>\00a0\00a0";
+}
+
+.content-process-content {
+	padding: 30px 0 0;
+	text-align: center;
+}
+
 div.click_indicator {
 	 border: 4px dashed #FF0000;
 	 cursor: pointer;
@@ -239,12 +267,12 @@ div.person {
 	font-size: 12px;
 	position: absolute;
 	cursor: pointer;
-	width: 100px;
+	width: 80px;
 	right: 0;
 	text-align: center;
 	float:right;
 	padding: 10px 20px;
-	z-index: -10;
+	z-index: 0;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	opacity: 0.5;

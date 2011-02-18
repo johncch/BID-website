@@ -1,6 +1,45 @@
 debug = false;
 $(function() {
 		paging.init();
+		
+		preloadImages([
+			'images/helper/Helper_Confirm.png',
+			'images/helper/Helper_Decline.gif',
+			'images/helper/Helper_home_page.gif',
+			'images/helper/Helper_Map.gif',
+			'images/helper/Helper_Notification_sent.gif',
+			'images/helper/Helper_Start_page.gif',
+			'images/helper/Helper_Task_info.gif',
+			'images/helper/Helper_task_notification.png',
+			'images/assigner/00_appstart.png',
+			'images/assigner/00000002',
+			'images/assigner/a_login  (TYPE).png',
+			'images/assigner/a_login.png',
+			'images/assigner/b_billing information.png',
+			'images/assigner/b_helpermenu.png',
+			'images/assigner/b_taskmenu EDIT.png',
+			'images/assigner/b_taskmenu.png',
+			'images/assigner/c_newtask.png',
+			'images/assigner/d_cashier.png',
+			'images/assigner/d_custodian.png',
+			'images/assigner/d_driver.png',
+			'images/assigner/d_handyman.png',
+			'images/assigner/d_mover.png',
+			'images/assigner/d_sitter.png',
+			'images/assigner/d_typist.png',
+			'images/assigner/d2_location.png',
+			'images/assigner/d2_meetingtime.png',
+			'images/assigner/e_results.png',
+			'images/assigner/f_profileRoger Copy 1.png',
+			'images/assigner/f_profileRoger Copy.png',
+			'images/assigner/f_profileRoger.png',
+			'images/assigner/g_call.png',
+			'images/assigner/g_text.png',
+			'images/assigner/last_screen.png',
+			'images/assigner/request_sent.png',
+			'images/assigner/ZipGig_AppsScreen.png'
+		]);
+
 		var self = this;
 		var fsm = new FSM({
 							display: $("div#iPhone"),
@@ -312,7 +351,7 @@ $(function() {
 
 var paging = {
 
-	order: ["main", "intro", "people", "process"],
+	order: ["main", "intro", "people", "process", "scenario1", "scenario2", "infoarch", "wireframe1", "wireframe2", "companalysis"],
 
 	main: null,
 	design: null,
@@ -322,20 +361,12 @@ var paging = {
 	currentPage: "main",
 
 	init: function() {
-/*		this.main = $("#main");
-		this.design = $("#intro");
-		this.people = $("#people");
-		this.process = $("#process");*/
+		this.main = $("#main");
 
-		/*$("#a-main").click(this.pageTurn("main"));
-		$("#a-design").click(this.pageTurn("design"));
-		$("#a-people").click(this.pageTurn("people"));
-		$("#a-process").click(this.pageTurn("process"));*/
 		$(".a-links").each(function(item, el) {
 			var self = $(el);
 			var id = self.attr("id").substr(2);
 			paging[id] = $("#" + id);
-			console.log(id);
 			self.click(paging.pageTurn(id));
 		});
 
@@ -357,6 +388,7 @@ var paging = {
 
 	pageTurn: function(pageName) {
 		return function(event) {
+			console.log("page name: " + pageName);
 			event.preventDefault();
 
 			var currentPage = paging.currentPage;
@@ -467,7 +499,7 @@ var FSM = function(options) {
 							window.setTimeout(function(){
 								rectDiv.remove();
 								}, 1000);
-							console.log(startX+","+startY+","+w+","+h+",");
+							//console.log(startX+","+startY+","+w+","+h+",");
 						});
 	}
 	this.setState(this.options.firstState);
@@ -528,3 +560,12 @@ FSM.prototype.setState = function(stateId) {
 		}
 	}
 };
+
+function preloadImages(images) {
+	var img;
+	for(var i = 0; i < images.length; i++) {
+		img = new Image(400, 750);
+		img.src = images[i];
+//		console.log(i);
+	}
+}
